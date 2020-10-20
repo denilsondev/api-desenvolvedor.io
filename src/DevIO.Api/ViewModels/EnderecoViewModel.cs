@@ -16,7 +16,7 @@ namespace DevIO.Api.ViewModels
         public string Logradouro { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatorio")]
-        [StringLength(14, ErrorMessage = "O campo {0} precisa ter entre {2} e {1} caracteres", MinimumLength = 11)]
+        [StringLength(14, ErrorMessage = "O campo {0} precisa ter entre {2} e {1} caracteres", MinimumLength = 1)]
         public string Numero { get; set; }
 
         public string Complemento { get; set; }
