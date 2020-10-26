@@ -23,7 +23,7 @@ namespace DevIO.Api.ViewModels
         public string Imagem { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatorio")]
-        public string Valor { get; set; }
+        public decimal Valor { get; set; }
 
         [ScaffoldColumn(false)]
         public DateTime DataCadastro { get; set; }
