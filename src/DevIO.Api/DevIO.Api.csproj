@@ -10,10 +10,13 @@
     <Compile Remove="wwwroot\app\**" />
     <Compile Remove="wwwroot\demo-webapi\**" />
     <Compile Remove="wwwroot\imagens\**" />
+    <Content Remove="wwwroot\app\**" />
     <Content Remove="wwwroot\demo-webapi\**" />
     <Content Remove="wwwroot\imagens\**" />
+    <EmbeddedResource Remove="wwwroot\app\**" />
     <EmbeddedResource Remove="wwwroot\demo-webapi\**" />
     <EmbeddedResource Remove="wwwroot\imagens\**" />
+    <None Remove="wwwroot\app\**" />
     <None Remove="wwwroot\demo-webapi\**" />
     <None Remove="wwwroot\imagens\**" />
   </ItemGroup>
