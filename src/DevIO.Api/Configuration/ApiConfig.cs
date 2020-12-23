@@ -19,10 +19,19 @@ namespace DevIO.Api.Configuration
             services.AddCors(options =>
             {
                 options.AddPolicy("Development",
-                    builder => builder.AllowAnyOrigin()
+                    builder => 
+                    builder.AllowAnyOrigin()
                         .AllowAnyMethod()
                         .AllowAnyHeader()
                         .AllowCredentials());
+
+                options.AddPolicy("Production",
+                    builder =>
+                    builder
+                            .WithMethods("GET")
+                            .WithOrigins("http://teste.com.br")
+                            .SetIsOriginAllowedToAllowWildcardSubdomains()
+                            .AllowAnyHeader());
             });
 
             return services;
@@ -31,7 +40,6 @@ namespace DevIO.Api.Configuration
         public static IApplicationBuilder UseMvcConfiguration(this IApplicationBuilder app)
         {
             app.UseHttpsRedirection();
-            app.UseCors("Development");
             app.UseMvc();
 
             return app;
