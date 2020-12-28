@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using DevIO.Api.Controllers;
 using DevIO.Api.Extensions;
 using DevIO.Api.ViewModels;
 using DevIO.Business.Intefaces;
@@ -9,19 +10,20 @@ using DevIO.Business.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DevIO.Api.Controllers
+namespace DevIO.Api.V1.Controllers
 {
     [Authorize]
-    [Route("api/fornecedores")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/fornecedores")]
     public class FornecedoresController : MainController
     {
         private readonly IFornecedorRepository _fornecedorRepository;
         private readonly IFornecedorService _fornecedorService;
         private readonly IEnderecoRepository _enderecoRepository;
         private readonly IMapper _mapper;
-        public FornecedoresController(IFornecedorRepository fornecedorRepository, 
-                                      IFornecedorService fornecedorService, 
-                                      IMapper mapper, 
+        public FornecedoresController(IFornecedorRepository fornecedorRepository,
+                                      IFornecedorService fornecedorService,
+                                      IMapper mapper,
                                       INotificador notificador,
                                       IUSer user,
                                       IEnderecoRepository enderecoRepository) : base(notificador, user)
@@ -33,6 +35,7 @@ namespace DevIO.Api.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IEnumerable<FornecedorViewModel>> ObterTodos()
         {
             var fornecedor = _mapper.Map<IEnumerable<FornecedorViewModel>>(await _fornecedorRepository.ObterTodos());
@@ -49,7 +52,7 @@ namespace DevIO.Api.Controllers
             return Ok(fornecedor);
         }
 
-        [ClaimsAuthorize("Fornecedor","Adicionar")]
+        [ClaimsAuthorize("Fornecedor", "Adicionar")]
         [HttpPost]
         public async Task<ActionResult<FornecedorViewModel>> Adicionar(FornecedorViewModel fornecedorViewModel)
         {
@@ -90,7 +93,7 @@ namespace DevIO.Api.Controllers
         [HttpPut("atualizar-endereco/{id:guid}")]
         public async Task<IActionResult> AtualizarEndereco(Guid id, EnderecoViewModel enderecoViewModel)
         {
-            if(id != enderecoViewModel.Id)
+            if (id != enderecoViewModel.Id)
             {
                 NotificarErro("O id informado não é o mesmo que foi passado na query");
                 return CustomResponse(enderecoViewModel);

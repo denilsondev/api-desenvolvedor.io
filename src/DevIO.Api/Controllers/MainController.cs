@@ -21,7 +21,7 @@ namespace DevIO.Api.Controllers
             _notificador = notificador;
             AppUser = appUser;
 
-            if(appUser.IsAuthenticated())
+            if (appUser.IsAuthenticated())
             {
                 UsuarioId = appUser.GetUserId();
                 UsuarioAutenticado = true;
@@ -34,9 +34,9 @@ namespace DevIO.Api.Controllers
         }
         protected ActionResult CustomResponse(object result = null)
         {
-            if(OperacaoValida())
+            if (OperacaoValida())
             {
-                return Ok(new 
+                return Ok(new
                 {
                     success = true,
                     data = result
@@ -53,7 +53,7 @@ namespace DevIO.Api.Controllers
 
         protected ActionResult CustomResponse(ModelStateDictionary modelState)
         {
-            if(!modelState.IsValid) NotificarErroModelInvalida(modelState);
+            if (!modelState.IsValid) NotificarErroModelInvalida(modelState);
             return CustomResponse();
         }
 
