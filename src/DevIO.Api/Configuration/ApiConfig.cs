@@ -13,7 +13,7 @@ namespace DevIO.Api.Configuration
             services.AddApiVersioning(options =>
             {
                 options.AssumeDefaultVersionWhenUnspecified = true;
-                options.DefaultApiVersion = new ApiVersion(1, 0);
+                options.DefaultApiVersion = new ApiVersion(1, 2);
                 options.ReportApiVersions = true;
             });
 

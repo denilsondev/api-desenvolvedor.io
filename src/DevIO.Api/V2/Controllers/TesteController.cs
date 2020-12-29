@@ -17,6 +17,7 @@ namespace DevIO.Api.V2.Controllers
 
         }
 
+        [HttpGet]
         public string Valor()
         {
             return "Sou a V2";
